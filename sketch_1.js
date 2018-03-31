@@ -99,7 +99,6 @@ function draw() {
     }
     textAlign(CENTER);
     text('Qux', width*0.5, height*0.5);
-    ballSelected = false;
 }
 
 
