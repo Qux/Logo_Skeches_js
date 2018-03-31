@@ -115,7 +115,12 @@ function touchMoved() {
 }
 
 function touchEnded() {
-  link("https://qux-jp.com/blog");
+  for(var i = 0; i < PARTICLE_NUM; i++) {
+    if(particles[i].isSelected) {
+        link("https://qux-jp.com/blog");
+        break;
+    }
+  }
 }
 
 function link(url, winName, options) {
