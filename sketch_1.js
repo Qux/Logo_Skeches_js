@@ -30,9 +30,15 @@ function Particle(x, y) {
     if(height < this.y) {
       this.height = 0;
     }
-
-    fill(41, 209, 243);
     ellipse(this.x, this.y, PARTICLE_SIZE, PARTICLE_SIZE);
+  }
+
+  this.isAt = function(x, y) {
+    if(abs(this.x - x) < PARTICLE_SIZE*0.5 && abs(this.y - y) < PARTICLE_SIZE*0.5) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
 }
@@ -65,14 +71,24 @@ function draw() {
 
     //Draw Circle
     for(var i = 0; i < PARTICLE_NUM; i++) {
-      //strokeWeight(0);
       strokeWeight(1);
       stroke(255, 25);
-      fill(127);
-      particles[i].draw();
+
+      if(particles[i].isAt(mouseX, mouseY)) {
+        fill(127);
+        particles[i].draw();
+        textSize(12);
+        textAlign(LEFT, CENTER);
+        fill(168);
+        text(random(100000, 1000000), particles[i].x,particles[i].y);
+      } else {
+        fill(41, 209, 243);
+        particles[i].draw();
+      }
     }
 
     fill(0);
     textSize(64);
+    textAlign(CENTER);
     text('Qux', width*0.5, height*0.5);
 }
