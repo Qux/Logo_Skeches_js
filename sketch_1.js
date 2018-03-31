@@ -116,7 +116,7 @@ function touchMoved() {
 
 function touchEnded() {
   for(var i = 0; i < PARTICLE_NUM; i++) {
-    if(particles[i].isSelected) {
+    if(particles[i].isAt(mouseX, mouseY)) {
         link("https://qux-jp.com/blog");
         break;
     }
