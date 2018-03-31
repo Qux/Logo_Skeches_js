@@ -5,6 +5,7 @@ var PARTICLE_SIZE = 30;
 var DIST_THRETH = 150;
 
 var particles = new Array(PARTICLE_NUM);
+var ballSelected = false;
 
 function Particle(x, y) {
   this.x = x;
@@ -45,10 +46,10 @@ function Particle(x, y) {
 }
 
 function setup() {
+    frameRate(60);
     background(0);
     createCanvas(windowWidth, windowHeight);
     textSize(64);
-
 
     for(var i = 0; i < PARTICLE_NUM; i++) {
       particles[i] = new Particle(Math.random() * width, Math.random() * height);
@@ -57,6 +58,7 @@ function setup() {
 
 function draw() {
   background(255);
+  ballSeleceted = false;
 
     //Draw Line
     for(var i = 0; i < PARTICLE_NUM; i++) {
@@ -75,11 +77,8 @@ function draw() {
       strokeWeight(1);
       stroke(255, 25);
 
-      if(particles[i].isAt(mouseX, mouseY)) {
-        particles[i].isSelected = true;
-      }
-
       if(particles[i].isSelected) {
+	      ballSelected = true;
         fill(127);
         particles[i].draw();
         textSize(12);
@@ -94,11 +93,25 @@ function draw() {
 
     fill(0);
     textSize(64);
-    textAlign(CENTER);
+    textAlign(CENTER, BOTTOM);
     text('Qux', width*0.5, height*0.5);
+    textSize(16);
+    text('Under construction', width * 0.5 + 1, height * 0.5 + 16);
+    ballSelected = false;
+
 }
 
+
+
 function touchStarted() {
+  for(var i = 0; i < PARTICLE_NUM; i++) {
+    if(particles[i].isAt(mouseX, mouseY)) {
+      particles[i].isSelected = true;
+    }
+  }
+}
+
+function mouseMoved() {
   for(var i = 0; i < PARTICLE_NUM; i++) {
     if(particles[i].isAt(mouseX, mouseY)) {
       particles[i].isSelected = true;
@@ -115,7 +128,9 @@ function touchMoved() {
 }
 
 function touchEnded() {
-  link("https://qux-jp.com/blog");
+  if(ballSelected) {
+      link("https://qux-jp.com/blog");
+  }
 }
 
 function link(url, winName, options) {
