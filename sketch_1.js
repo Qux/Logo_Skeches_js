@@ -51,7 +51,6 @@ function setup() {
     createCanvas(windowWidth, windowHeight);
     textSize(64);
 
-
     for(var i = 0; i < PARTICLE_NUM; i++) {
       particles[i] = new Particle(Math.random() * width, Math.random() * height);
     }
@@ -79,7 +78,7 @@ function draw() {
       stroke(255, 25);
 
       if(particles[i].isSelected) {
-	ballSelected = true;
+	      ballSelected = true;
         fill(127);
         particles[i].draw();
         textSize(12);
@@ -94,9 +93,9 @@ function draw() {
 
     fill(0);
     if(ballSelected) {
-	textSize(128);
+	     textSize(128);
     } else {
-	textSize(64);
+	     textSize(64);
     }
     textAlign(CENTER);
     text('Qux', width*0.5, height*0.5);
@@ -106,6 +105,14 @@ function draw() {
 
 
 function touchStarted() {
+  for(var i = 0; i < PARTICLE_NUM; i++) {
+    if(particles[i].isAt(mouseX, mouseY)) {
+      particles[i].isSelected = true;
+    }
+  }
+}
+
+function mouseMoved() {
   for(var i = 0; i < PARTICLE_NUM; i++) {
     if(particles[i].isAt(mouseX, mouseY)) {
       particles[i].isSelected = true;
