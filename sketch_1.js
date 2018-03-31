@@ -92,13 +92,11 @@ function draw() {
     }
 
     fill(0);
-    if(ballSelected) {
-	     textSize(128);
-    } else {
-	     textSize(64);
-    }
-    textAlign(CENTER);
+    textSize(64);
+    textAlign(CENTER, BOTTOM);
     text('Qux', width*0.5, height*0.5);
+    textSize(16);
+    text('Under construction', width * 0.5 + 1, height * 0.5 + 16);
     ballSelected = false;
 }
 
