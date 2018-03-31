@@ -2,7 +2,7 @@ var img;
 
 function setup() {
     background(255);
-    createCanvas(windowWidth, windowHeight); 
+    createCanvas(windowWidth, windowHeight);
     textSize(15);
     textAlign(CENTER);
 
@@ -23,7 +23,7 @@ function draw() {
 
 function touchStarted() {
     ellipse(width * 0.5, height * 0.5, 10, 10);
-} 
+}
 
 function touchEnded() {
    if(mouseX < width * 0.5) {
@@ -34,7 +34,5 @@ function touchEnded() {
 }
 
 function link(url, winName, options) {
-
-      winName && open(url, winName, options) || (location = url);
-
+    winName && open(url, winName, options) || (location = url);
 }

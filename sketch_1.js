@@ -9,10 +9,10 @@ var particles = new Array(PARTICLE_NUM);
 function Particle(x, y) {
   this.x = x;
   this.y = y;
-  this.vx = new p5.Vector(random(-2.0, 2.0),random(-2.0, 2.0),0);
+  this.vx = new p5.Vector(random(-1.0, 1.0),random(-1.0, 1.0),0);
+  this.isSelected = false;
 
   this.draw = function() {
-
     this.x += this.vx.x;
     this.y += this.vx.y;
 
@@ -31,6 +31,7 @@ function Particle(x, y) {
       this.height = 0;
     }
     ellipse(this.x, this.y, PARTICLE_SIZE, PARTICLE_SIZE);
+    this.isSelected = false;
   }
 
   this.isAt = function(x, y) {
@@ -75,6 +76,10 @@ function draw() {
       stroke(255, 25);
 
       if(particles[i].isAt(mouseX, mouseY)) {
+        particles[i].isSelected = true;
+      }
+
+      if(particles[i].isSelected) {
         fill(127);
         particles[i].draw();
         textSize(12);
@@ -91,4 +96,28 @@ function draw() {
     textSize(64);
     textAlign(CENTER);
     text('Qux', width*0.5, height*0.5);
+}
+
+function touchStarted() {
+  for(var i = 0; i < PARTICLE_NUM; i++) {
+    if(particles[i].isAt(mouseX, mouseY)) {
+      particles[i].isSelected = true;
+    }
+  }
+}
+
+function touchMoved() {
+  for(var i = 0; i < PARTICLE_NUM; i++) {
+    if(particles[i].isAt(mouseX, mouseY)) {
+      particles[i].isSelected = true;
+    }
+  }
+}
+
+function touchEnded() {
+  link("https://qux-jp.com/blog");
+}
+
+function link(url, winName, options) {
+    winName && open(url, winName, options) || (location = url);
 }
