@@ -135,3 +135,7 @@ function touchEnded() {
 function link(url, winName, options) {
     winName && open(url, winName, options) || (location = url);
 }
+
+function windowResized(){
+  resizeCanvas(windowWidth, windowHeight);
+}
